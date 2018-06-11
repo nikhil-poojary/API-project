@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Facts</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+</head>
+<style>
+    body{
+        background-color: rgb(91, 91, 90);
+        font-family: Nunito;
+    }
+    .row{
+        width: 480px;
+        height: 300px;
+        margin-top: 50px;
+        margin-left: 120px;
+        padding: 10px 10px 10px 25px;
+            
+    }
+    #numberInput{
+        width: 220px;
+        height: 20px;
+        border: none;
+        padding: 5px 5px 5px 10px;
+        border-radius: 2px;
+    }
+    #fact{
+        display: none;
+    }
+    </style>
+<body>
+    <div class="container" >
+        <div class="row" style="background-color: rgb(17, 144, 255)" >
+           <h1 style="color: white">Number Facts</h1>
+           <p style="color: white">Enter a number and get a random facts</p>
+           <input type="number" id="numberInput" value="10000000 "min="0" max="10000000" placeholder="Enter a number...">
+            <div id="fact">
+                <h4 style="color: black">Number Facts</h4>
+                <p id="factText" style="color: black"></p>
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        let fact = document.querySelector('#fact');
+        let factText = document.querySelector('#factText');
+        
+        let numberInput = document.querySelector('#numberInput');
+        numberInput.addEventListener('input', getFactFetch);
+        
+        function getFactFetch(){
+            let number = numberInput.value;
+            
+            fetch('http://numbersapi.com/'+number)
+            .then(response => response.text())
+            .then(data => {
+                if(number != ''){
+                fact.style.display = 'block';
+                factText.innerHTML = data;
+                }
+            })
+        }
+        
+    </script>
+</body>
+</html>
